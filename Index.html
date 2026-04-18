@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Keerthi Gouru · Health Informatics Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --ink: #1a1714;
+    --teal: #2a6b6e;
+    --teal-light: #3d8f93;
+    --teal-pale: #e0f0f1;
+    --rust: #b85c38;
+    --gold: #c9a84c;
+    --mid: #6b6460;
+    --line: rgba(26,23,20,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--teal);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 60px 80px 80px;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+  .hero-name {
+    font-size: clamp(52px, 5vw, 76px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-title {
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--mid);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .hero-bio {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 480px;
+    border-left: 2px solid var(--teal);
+    padding-left: 24px;
+    margin-bottom: 40px;
+  }
+  .hero-cta {
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--teal-light); }
+  .btn-outline {
+    background: transparent;
+    color: var(--teal);
+    border: 1.5px solid var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal); color: #fff; }
+
+  .hero-visual {
+    background: var(--teal);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 2px;
+    width: 80%; height: 70%;
+    opacity: 0.15;
+  }
+  .hero-grid div { background: rgba(255,255,255,0.6); border-radius: 1px; }
+  .hero-grid div:nth-child(3n) { background: rgba(255,255,255,0.3); }
+  .hero-grid div:nth-child(5n) { background: transparent; }
+  .hero-stats {
+    position: absolute;
+    bottom: 60px; left: 60px; right: 60px;
+    display: flex; gap: 32px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(4px);
+    padding: 20px 24px;
+    flex: 1;
+    border-top: 2px solid rgba(255,255,255,0.4);
+  }
+  .stat-number {
+    font-size: 36px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 80px; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(36px, 3.5vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 60px;
+  }
+  .section-title em { font-style: italic; color: var(--teal); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--ink); }
+  #skills .section-label { color: var(--gold); }
+  #skills .section-title { color: #fff; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .skill-block {
+    background: rgba(255,255,255,0.04);
+    padding: 32px 28px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.25s;
+  }
+  .skill-block:hover { background: rgba(255,255,255,0.07); }
+  .skill-icon {
+    width: 36px; height: 36px;
+    margin-bottom: 16px;
+    color: var(--teal-light);
+  }
+  .skill-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .skill-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .exp-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.8;
+    padding-top: 4px;
+  }
+  .exp-meta .org { color: var(--teal); font-weight: 500; }
+  .exp-content {}
+  .exp-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .exp-bullets { list-style: none; padding: 0; }
+  .exp-bullets li {
+    font-size: 16px;
+    color: var(--mid);
+    padding: 4px 0 4px 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--teal);
+    font-size: 14px;
+  }
+
+  /* ── CAPSTONE STORY ── */
+  #capstone { background: #f0ebe0; }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .story-block {
+    padding: 40px;
+    background: #fff;
+    border-top: 3px solid var(--teal);
+    position: relative;
+  }
+  .story-block::before {
+    content: attr(data-num);
+    position: absolute;
+    top: 40px; right: 40px;
+    font-family: 'DM Mono', monospace;
+    font-size: 48px;
+    color: rgba(42,107,110,0.08);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .story-block h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .story-block p, .story-block ul {
+    font-size: 16px;
+    color: var(--mid);
+    line-height: 1.7;
+  }
+  .story-block ul { list-style: none; padding: 0; }
+  .story-block ul li { padding: 3px 0 3px 16px; position: relative; }
+  .story-block ul li::before { content: '·'; position: absolute; left: 0; color: var(--teal); font-size: 20px; line-height: 1.2; }
+
+  /* ── ARTIFACTS ── */
+  #artifacts { background: var(--ink); }
+  #artifacts .section-label { color: var(--gold); }
+  #artifacts .section-title { color: #fff; }
+  .artifacts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .artifact-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    transition: border-color 0.25s;
+  }
+  .artifact-card:hover { border-color: var(--teal-light); }
+  .artifact-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .artifact-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 8px;
+  }
+  .artifact-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .artifact-body {
+    padding: 20px 28px 28px;
+  }
+  .artifact-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .artifact-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    background: rgba(61,143,147,0.2);
+    color: var(--teal-light);
+    text-transform: uppercase;
+  }
+
+  /* ── EDUCATION / CERT ── */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .edu-block {
+    padding: 32px;
+    border: 1px solid var(--line);
+  }
+  .edu-block h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .edu-block .sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .edu-block p { font-size: 15px; color: var(--mid); }
+  .cert-list { list-style: none; padding: 0; margin-top: 16px; }
+  .cert-list li {
+    font-size: 15px;
+    color: var(--mid);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-list li::before { content: '✦'; color: var(--gold); font-size: 10px; flex-shrink: 0; }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--teal);
+    text-align: center;
+    padding: 100px 80px;
+  }
+  #contact .section-label { color: rgba(255,255,255,0.6); }
+  #contact .section-title { color: #fff; margin-bottom: 20px; }
+  #contact p { color: rgba(255,255,255,0.75); font-size: 18px; margin-bottom: 40px; }
+  .contact-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .contact-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 32px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    transition: all 0.25s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 300px; }
+    section { padding: 60px 24px; }
+    .skills-grid, .story-grid, .artifacts-grid, .edu-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .hero-text { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">K. Gouru · Health Informatics</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#capstone">Capstone</a></li>
+    <li><a href="#artifacts">Artifacts</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about" style="padding:0;">
+  <div class="hero-text">
+    <p class="hero-tag">Health Informatics · Clinical Analytics · Columbus, OH</p>
+    <h1 class="hero-name">Keerthi<br><em>Gouru</em></h1>
+    <p class="hero-title">MS Health Informatics · Franklin University</p>
+    <p class="hero-bio">
+      Health Informatics professional with 4–5 years of combined experience in clinical data analysis, physiotherapy, and healthcare operations. I bridge clinical knowledge and data science to improve patient outcomes, documentation accuracy, and operational efficiency. My work spans EHR validation, Power BI reporting, SQL-driven insights, and hands-on rehabilitation practice — translating messy, real-world health data into decisions that matter.
+    </p>
+    <div class="hero-cta">
+      <a href="#capstone" class="btn btn-primary">View Capstone Story</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-grid">
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">4–5</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Clinical Settings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">EHR</div>
+        <div class="stat-label">+ SQL + Power BI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Core Competencies</p>
+  <h2 class="section-title">What I <em>Bring</em></h2>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 17H7A5 5 0 017 7h2M15 7h2a5 5 0 010 10h-2M9 12h6"/></svg>
+      <div class="skill-name">Clinical Data Analysis</div>
+      <div class="skill-desc">Identifying treatment trends, documentation gaps, and patient improvement metrics from structured EHR datasets.</div>
+    </div>
+    <div class="skill-block">
+      <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <div class="skill-name">EHR Management</div>
+      <div class="skill-desc">Validating and standardizing patient records across orthopedics, neurology, general medicine, and surgery departments.</div>
+    </div>
+    <div class="skill-block">
+      <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h10M4 17h6"/><circle cx="17" cy="17" r="3"/><path d="M20 20l2 2"/></svg>
+      <div class="skill-name">SQL & Power BI</div>
+      <div class="skill-desc">Writing queries for data extraction and building dashboards that translate clinical data into stakeholder-ready reports.</div>
+    </div>
+    <div class="skill-block">
+      <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
+      <div class="skill-name">Health Informatics & Governance</div>
+      <div class="skill-desc">Applying data governance principles to ensure compliant, accurate, and interoperable healthcare information systems.</div>
+    </div>
+    <div class="skill-block">
+      <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      <div class="skill-name">Patient Assessment & Rehab</div>
+      <div class="skill-desc">Conducting musculoskeletal, neurological, and functional evaluations; designing individualized rehabilitation plans.</div>
+    </div>
+    <div class="skill-block">
+      <svg class="skill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      <div class="skill-name">Quality Improvement</div>
+      <div class="skill-desc">Auditing medical records, identifying inconsistencies, and redesigning intake workflows to improve documentation quality.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:#fff;">
+  <p class="section-label">Professional Journey</p>
+  <h2 class="section-title">Clinical & <em>Informatics</em> Experience</h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="org">Osmania General Hospital</div>
+        Hyderabad, India<br>Jul 2023 – Sep 2023
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Clinical Data Analyst / Health Informatics Intern</div>
+        <ul class="exp-bullets">
+          <li>Collected, cleaned, and standardized patient medical data to support accurate EHR documentation across orthopedics, neurology, general medicine, and surgery.</li>
+          <li>Analyzed clinical datasets to identify treatment trends, patient improvement metrics, and documentation gaps.</li>
+          <li>Conducted routine audits on medical records to improve completeness, compliance, and accuracy.</li>
+          <li>Supported physicians and nursing staff in optimizing EHR workflows, reducing data-entry inconsistencies.</li>
+          <li>Developed structured reporting formats used by clinical teams for decision-making and patient monitoring.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="org">Halcyon Pain Management Centre</div>
+        Dec 2023 – Aug 2024
+        <br><br>
+        <div class="org">Nivika's Physiotherapy Clinic</div>
+        Feb 2023 – Nov 2023
+        <br><br>
+        <div class="org">Susruta Institute of Physical Medicine & Rehabilitation</div>
+        Mar 2023 – Jun 2023
+        <br><br>
+        <div class="org">Padma's Ortho & Physiotherapy Clinic</div>
+        Aug 2021 – Dec 2022
+      </div>
+      <div class="exp-content">
+        <div class="exp-title">Physiotherapist — Clinical Practice (Multiple Centres)</div>
+        <ul class="exp-bullets">
+          <li>Conducted detailed physical assessments including musculoskeletal, neurological, and functional evaluations.</li>
+          <li>Designed individualized rehabilitation plans based on patient condition, clinical data, and treatment progress.</li>
+          <li>Administered therapeutic exercises, manual therapy, electrophysical modalities, and pain-management routines.</li>
+          <li>Maintained structured patient records, tracked improvement metrics, and communicated progress to interdisciplinary teams.</li>
+          <li>Educated patients on recovery techniques, posture correction, and long-term health maintenance.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CAPSTONE STORY -->
+<section id="capstone">
+  <p class="section-label">Capstone Project</p>
+  <h2 class="section-title">The HW Dental <em>Story</em></h2>
+  <div class="story-grid">
+    <div class="story-block" data-num="01">
+      <h3>The Problem</h3>
+      <p>HW Dental, a fast-growing dental chain with four Columbus-area branches (Clintonville, Polaris, Sawmill, Westerville), enrolled over <strong>4,500 new patients</strong> in one year. Despite this growth, leadership lacked clarity on <em>who</em> their patients were, <em>how</em> they were being reached, and <em>where</em> marketing dollars were most effective — especially for their primary targets: Medicaid recipients and Spanish-speaking populations.</p>
+    </div>
+    <div class="story-block" data-num="02">
+      <h3>The Data Journey</h3>
+      <ul>
+        <li>4,546 patients · 21 variables · real, messy data from a live practice management system</li>
+        <li>Standardized inconsistent city name capitalization (e.g., "columbus" vs "COLUMBUS")</li>
+        <li>Built a custom Medicaid indicator from raw insurance carrier names using a reference list</li>
+        <li>Resolved unreliable gender field by applying a multi-layer name-based estimation algorithm</li>
+        <li>Cleaned and categorized 73% of patients with a referral source (Google, personal referrals, insurance sites, word of mouth)</li>
+      </ul>
+    </div>
+    <div class="story-block" data-num="03">
+      <h3>The Solution</h3>
+      <ul>
+        <li>Branch-level patient profiling by demographics, insurance mix, and referral source</li>
+        <li>Referral channel analysis to identify highest-performing acquisition pathways per location</li>
+        <li>Geographic mapping of patient ZIP codes to surface underserved areas and growth opportunities</li>
+        <li>Spanish-speaking population analysis using Language field + Spanish_Likelihood name-based estimate (≈24% of patients flagged High)</li>
+        <li>Communication preference segmentation to guide targeted outreach strategies</li>
+      </ul>
+    </div>
+    <div class="story-block" data-num="04">
+      <h3>The Impact</h3>
+      <ul>
+        <li>Actionable recommendations for reallocating marketing spend by channel and branch</li>
+        <li>Identified demographic gaps between branches, informing location-specific outreach campaigns</li>
+        <li>Provided data-driven guidance for reaching Medicaid and Spanish-speaking communities more effectively</li>
+        <li>Demonstrated how name-based estimation can supplement incomplete language/demographic data in real healthcare settings</li>
+        <li>Delivered insights the clinic can use to make better decisions about where and how to grow</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ARTIFACTS -->
+<section id="artifacts">
+  <p class="section-label">Technical Artifacts</p>
+  <h2 class="section-title">Selected <em>Work</em></h2>
+  <div class="artifacts-grid">
+
+    <div class="artifact-card">
+      <div class="artifact-header">
+        <div class="artifact-type">SQL · Data Cleaning</div>
+        <div class="artifact-title">Patient Data Standardization Pipeline</div>
+      </div>
+      <div class="artifact-body">
+        <p class="artifact-desc">SQL queries used to standardize city name capitalization, build a Medicaid insurance indicator variable from raw carrier names, and flag missing referral source records across 4,546 HW Dental patients. Demonstrates real-world data cleaning decision-making.</p>
+        <div class="artifact-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">EHR Data</span>
+          <span class="tag">Healthcare Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artifact-card">
+      <div class="artifact-header">
+        <div class="artifact-type">Power BI · Dashboard</div>
+        <div class="artifact-title">Branch-Level Marketing Analytics Dashboard</div>
+      </div>
+      <div class="artifact-body">
+        <p class="artifact-desc">Interactive Power BI dashboard comparing all four HW Dental branches on patient demographics, insurance mix, referral channel performance, and geographic distribution. Designed for non-technical stakeholders to explore insights without SQL.</p>
+        <div class="artifact-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Data Visualization</span>
+          <span class="tag">Marketing Analytics</span>
+          <span class="tag">Stakeholder Reporting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artifact-card">
+      <div class="artifact-header">
+        <div class="artifact-type">Python / R · Statistical Analysis</div>
+        <div class="artifact-title">Referral Source Effectiveness Analysis</div>
+      </div>
+      <div class="artifact-body">
+        <p class="artifact-desc">Statistical breakdown of 73% of patients with recorded referral sources, normalizing inconsistent entries (e.g., "google" vs "Google" vs "Internet (google)") and comparing channel performance by branch, insurance type, and language group.</p>
+        <div class="artifact-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Statistical Analysis</span>
+          <span class="tag">Marketing Data</span>
+          <span class="tag">Categorical Data</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="artifact-card">
+      <div class="artifact-header">
+        <div class="artifact-type">Clinical Informatics · EHR</div>
+        <div class="artifact-title">EHR Documentation Audit — Osmania General Hospital</div>
+      </div>
+      <div class="artifact-body">
+        <p class="artifact-desc">Systematic audit of medical records across 4 departments at Osmania General Hospital. Identified recurring documentation inconsistencies, proposed structured intake process improvements, and developed reporting templates used by clinical teams.</p>
+        <div class="artifact-tags">
+          <span class="tag">EHR</span>
+          <span class="tag">Clinical Audit</span>
+          <span class="tag">Data Quality</span>
+          <span class="tag">Workflow Optimization</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="background:#fff;">
+  <p class="section-label">Education & Certifications</p>
+  <h2 class="section-title">Credentials &amp; <em>Training</em></h2>
+  <div class="edu-grid">
+    <div class="edu-block">
+      <h3>Master of Science in Health Informatics</h3>
+      <p class="sub">Franklin University · Columbus, OH · In Progress</p>
+      <p>Focused on clinical data analytics, EHR systems, health data governance, and applied informatics solutions for healthcare operations improvement.</p>
+    </div>
+    <div class="edu-block">
+      <h3>Bachelor of Physiotherapy (BPT)</h3>
+      <p class="sub">KNR University of Health Sciences · 2017–2023</p>
+      <p>Comprehensive training in musculoskeletal assessment, neurological rehabilitation, manual therapy, and clinical documentation across multiple healthcare settings.</p>
+    </div>
+  </div>
+  <div style="margin-top:40px;">
+    <p class="section-label" style="margin-bottom:16px;">Certifications</p>
+    <ul class="cert-list">
+      <li>SQL for Data Scientists — Certificate of Completion (Nov 2024)</li>
+      <li>Kinesio Taping — Movement Solutions (Aug 2022)</li>
+      <li>Dry Needling Technique Certification (Nov 2022)</li>
+      <li>Physiotherapy Scientific Session — Neurology & Orthopedics (Jun 2022)</li>
+      <li>Certificate of Appreciation — Special Olympics Bharat (Apr 2022)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Let's Connect</p>
+  <h2 class="section-title" style="margin-bottom:16px;">Open to <em>Opportunities</em></h2>
+  <p>Health Informatics roles, clinical analytics, EHR consulting, and healthcare data projects in the Columbus, OH area and beyond.</p>
+  <div class="contact-links">
+    <a href="mailto:keerthigouru3@gmail.com" class="contact-link">keerthigouru3@gmail.com</a>
+    <a href="tel:+13802069488" class="contact-link">+1 (380) 206-9488</a>
+    <a href="https://linkedin.com/in/keerthi-gouru-9a571b248" class="contact-link" target="_blank">LinkedIn Profile</a>
+  </div>
+</section>
+
+<footer>
+  © 2025 Keerthi Gouru · Health Informatics Portfolio · Franklin University · Columbus, Ohio
+</footer>
+
+</body>
+</html>
